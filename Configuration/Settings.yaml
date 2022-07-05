@@ -13,3 +13,8 @@ Neos:
         autoInclude:
           Psmb.Footnote:
             - 'Main'
+
+Psmb:
+  Footnote:
+    autoLinking: false
+    nl2br: false
