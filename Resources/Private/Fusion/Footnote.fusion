@@ -6,7 +6,7 @@ prototype(Psmb.Footnote:PregMatchAll) {
 }
 
 # Gathers footnotes from text
-prototype(Psmb.Footnote:FootnoteProcessor) < prototype(Neos.Fusion:Array) {
+prototype(Psmb.Footnote:FootnoteProcessor) < prototype(Neos.Fusion:Join) {
     content = Neos.Fusion:Value {
         value = ${value}
         @process.parse = Psmb.Footnote:PregReplaceCallback {
@@ -16,7 +16,7 @@ prototype(Psmb.Footnote:FootnoteProcessor) < prototype(Neos.Fusion:Array) {
             replacementRenderer = ${matches[2] + '<sup class="footnote" id="footnoteSource_' + iterator.cycle + '"><a href="#footnote_' + iterator.cycle + '">' + iterator.cycle + '</a></sup>'}
         }
     }
-    footnotes = Neos.Fusion:Collection {
+    footnotes = Neos.Fusion:Loop {
         @if.live = ${node.context.workspaceName == 'live'}
         @process.wrap = ${value && '<ul class="footnoteList">' + value + '</ul>'}
         collection = Psmb.Footnote:PregMatchAll {
